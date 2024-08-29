@@ -81,7 +81,7 @@ function WelcomeQuests({ setQuestState,setQuestType }) {
                                         localStorage.setItem('idAsistenteDiabetes',response.data.idAsistente)
                                         localStorage.setItem('emailAsistente',response.data.correo)
                                         localStorage.setItem('emailQuests', email)
-                                        localStorage.setItem('nombreAsistente', `${response.data.nombre} ${response.data.nombre}`)
+                                        localStorage.setItem('nombreAsistente', `${response.data.nombre} ${response.data.apellido}`)
                                         localStorage.setItem('telefonoAsistente', response.data.metadaData.telefono);
                                         localStorage.setItem('estadoProcedenciaAsistente', response.data.metadaData.estado);
                                         
