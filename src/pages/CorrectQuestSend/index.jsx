@@ -11,10 +11,11 @@ function CorrectQuestSend() {
 
     const handleConstancia = () => {
         // Aquí puedes agregar la lógica para lo que debería hacer el botón de "Constancia"
-        const emailUser = localStorage.getItem('emailAsistente')
-        location.href=`https://forms.gle/TY7S3z3hXqkrrj227`
-        // Ejemplo: abrir un enlace o descargar un archivo
+        const emailUser = localStorage.getItem('emailAsistente');
+        window.open('https://forms.gle/TY7S3z3hXqkrrj227', '_blank');
+        // El segundo argumento '_blank' hace que el enlace se abra en una nueva pestaña
     };
+    
 
     return (
         <div className="flex flex-col justify-center items-center w-full h-full">
