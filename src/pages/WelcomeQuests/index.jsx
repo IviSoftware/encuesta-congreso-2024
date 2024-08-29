@@ -17,8 +17,11 @@ function WelcomeQuests({ setQuestState,setQuestType }) {
     return (
         <div>
             <Navbar />
+
+            <CorrectQuestSend />
+
    
-            <div className="flex items-center justify-center" style={{ maxWidth: "550px", margin: "0 auto" }} >
+           <div className="flex items-center justify-center" style={{ maxWidth: "550px", margin: "0 auto" }} >
                 <div className="text-center p-6">
                     <h1 className="text-3xl font-bold mt-12 mb-8 apple-text-animation">
                         ¡Bienvenido(a) a la Encuesta del
@@ -71,9 +74,10 @@ function WelcomeQuests({ setQuestState,setQuestType }) {
                                         Swal.fire({
                                             title: "¡Parece que ya has enviado tus respuestas! 😊",
                                             icon: "info",
-                                            html: `Puedes acceder a tu constancia <a href="https://constancias.integrameetings.com/cnd/2024/congreso/sesion.php?correo=${email}" target="_blank">aquí</a>.`,
+                                            html: `Puedes acceder a tu constancia <a href="https://constancias.integrameetings.com/cnd/2024/congreso/sesion.php?correo=${encodeURIComponent(email)}" target="_blank" rel="noopener noreferrer" style="color: #007bff; text-decoration: underline;">aquí</a>.`,
                                             confirmButtonText: "Cerrar"
                                         });
+                                        
                                     }else{
                                         //Validariamos el tipo de encuesta a activarse
                                         localStorage.setItem('idAsistenteDiabetes',response.data.idAsistente)

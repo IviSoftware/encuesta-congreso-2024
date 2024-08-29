@@ -6,16 +6,15 @@ import { Quest1 } from './pages/Quest1';
 import { Quest2 } from './pages/Quest2';
 import { Quest3 } from './pages/Quest3';
 import { Quest4 } from './pages/Quest4';
+import { CautivaModal } from './components/organismos/CautivaModal';
 import { SupportButton } from './components/atomos/SupportButton';
 
 
 
 function App() {
   const [yourParamValue, setYourParamValue] = useState(null);
-  const [questState, setQuestState] = useState("start");
+  const [questState, setQuestState] = useState("staging");
   const [questType, setQuestType] = useState("");
-  const nodeRef = useRef(null);
-  const nodeRef2 = useRef(null);
 
   useEffect(() => {
     // Obtén la URL actual
@@ -37,6 +36,14 @@ function App() {
   return (<>
     <SupportButton />
     <TransitionGroup>
+    {questState === 'staging' && (
+                <CautivaModal
+                fn={()=>setQuestState('start')}
+                    message="Esta encuesta estará disponible del 07 al 12 de septiembre y es un requisito obligatorio para recibir tu constancia."
+                />
+            )}
+
+
       {questState === "start" && (
         <CSSTransition
           in={questState}

@@ -20,3 +20,82 @@
     transition: opacity 350ms ease-in, transform 350ms ease-in;
   }
   
+
+  /* CSS for iOS-like modal animations */
+.ios-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.ios-modal-container {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  animation: slide-up 0.3s ease-out forwards;
+}
+
+.ios-modal-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.ios-modal-button {
+  background: #007aff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.ios-modal-button:hover {
+  background-color: #005bb5;
+}
+
+.ios-fade-slide-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ios-fade-slide-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.ios-fade-slide-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ios-fade-slide-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+@keyframes slide-up {
+  from {
+      transform: translateY(100px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
