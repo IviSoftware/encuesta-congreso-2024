@@ -18,8 +18,6 @@ function WelcomeQuests({ setQuestState,setQuestType }) {
         <div>
             <Navbar />
 
-            <CorrectQuestSend />
-
    
            <div className="flex items-center justify-center" style={{ maxWidth: "550px", margin: "0 auto" }} >
                 <div className="text-center p-6">
