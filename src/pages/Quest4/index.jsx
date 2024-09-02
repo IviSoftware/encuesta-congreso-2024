@@ -29,7 +29,7 @@ function Quest4() {
     const keysToValidate2 = ["extraTelefono"];
     const keysTraduction2 = ["Teléfono"];
 
-    const keysToValidate3 = ["extraMedioEnteroCongreso", "extraKitCongresistaAdecuado", "extraTransmisionPonenciasAdecuada", "extraMediosAudiovisualesVisibles", "extraInstalacionesAdecuadas", "extraDistribucionSalones","extraStandsInformacionRelevante", "extraViajeSaludInnovador", "extraTemasActuales"];
+    const keysToValidate3 = ["extraMedioEnteroCongreso", "extraKitCongresistaAdecuado", "extraTransmisionPonenciasAdecuada", "extraMediosAudiovisualesVisibles", "extraInstalacionesAdecuadas", "extraDistribucionSalones","extraStandsInformacionRelevante", "extraMediosAudiovisualesAdecuados","extraViajeSaludInnovador", "extraTemasActuales"];
     const keysTraduction3 = ["Medio por el que se enteró del congreso", "Kit adecuado", "Transmisión adecuada", "Medios audiovisuales", "Instalaciones adecuadas", "Distribución de salones", "Información en stands",,"Medios audiovisuales", "Viaje por la salud", "Temas abordados"];
 
     const keysToValidate4 = ["extraNivelContenidos", "extraDistribucionActividades", "extraTiempoActividades", "extraSeleccionPonentes", "extraParticipacionPonentes", "extraComunicacionPonentes"];
@@ -134,7 +134,7 @@ function Quest4() {
                 <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="La distribución de los salones fue adecuada" options={['Sí', 'No']} name="extraDistribucionSalones" />
                 <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="Los stands en la zona comercial contaban con información relevante y complementaria al objetivo del congreso" options={['Sí', 'No']} name="extraStandsInformacionRelevante" />
                 <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="La distribución de los salones fue adecuada" options={['Sí', 'No']} name="extraDistribucionSalones" />
-                <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="¿Los medios audiovisuales dentro de cada ponencia fueron adecuados y visibles en las transmisiones (pantallas, audios, etc.)?" options={['Sí', 'No']} name="extraMedios" />
+                <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="¿Los medios audiovisuales dentro de cada ponencia fueron adecuados y visibles en las transmisiones (pantallas, audios, etc.)?" options={['Sí', 'No']} name="extraMediosAudiovisualesAdecuados" />
                 <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="¿Consideras que el viaje por la salud fue una idea innovadora y acorde al objetivo del congreso?" options={['Sí', 'No']} name="extraViajeSaludInnovador" />
                 <OptionsCautivaForms setDataModule={setDataModule} dataModule={dataModule} text="¿Te parece que los temas abordados en el programa son de actualidad y necesarios para cumplir el objetivo del congreso?" options={['Sí', 'No']} name="extraTemasActuales" />
                 <CautivaBtnForm text="Continuar" onClick={() => {
