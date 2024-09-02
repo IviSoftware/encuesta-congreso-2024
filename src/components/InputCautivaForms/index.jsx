@@ -39,7 +39,7 @@ function InputCautivaForms({ text, name, type, max, setDataModule, dataModule, v
 
         if (max) {
             // Limitar la entrada si es necesario
-            if (value.length <= Number(max) && Number(value) <= 100) {
+            if (value.length <= Number(max) && Number(value) <= 120) {
                 setLimit(value);
                 sendToStageApi(value);
             }
