@@ -1,5 +1,3 @@
-import { json } from "react-router-dom";
-
 function validateObjectFields(obj, keys, translations,setDataModule) {
 
    
@@ -90,14 +88,8 @@ function formatSurveyResponse1(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-  
-
-
-     // Crear el array filtrando valores vacíos
-     const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-     responses.extraPlenariasInteresantes = JSON.stringify(extraPlenariasInteresantesArray).replace(/"/g, "'");
-
-    
+    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
+    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
 
     // Devolver el objeto formateado
     return responses;
@@ -150,15 +142,8 @@ function formatSurveyResponse2(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-
-
-      // Crear el array filtrando valores vacíos
-      const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-
-      // Asignar el array directamente en la respuesta
-      responses.extraPlenariasInteresantes = JSON.stringify(extraPlenariasInteresantesArray).replace(/"/g, "'");
-
-    
+    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
+    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
 
     // Devolver el objeto formateado
     return responses;
@@ -208,13 +193,8 @@ function formatSurveyResponse3(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-
-       // Crear el array filtrando valores vacíos
-       const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-
-       // Asignar el array directamente en la respuesta
-       responses.extraConferenciasInteresantes = JSON.stringify(extraPlenariasInteresantesArray).replace(/"/g, "'");
-   
+    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
+    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
 
     // Devolver el objeto formateado
     return responses;
@@ -272,13 +252,8 @@ function formatSurveyResponse4(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraConferenciaInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraConferenciaInteresantes2 || '';
-
-
-    // Crear el array filtrando valores vacíos
     const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-
-    // Asignar el array directamente en la respuesta
-    responses.extraConferenciasInteresantes = JSON.stringify(extraPlenariasInteresantesArray).replace(/"/g, "'");;
+    responses.extraConferenciasInteresantes = extraPlenariasInteresantesArray.join(', ');
 
 
 

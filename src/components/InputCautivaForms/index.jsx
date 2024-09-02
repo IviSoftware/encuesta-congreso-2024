@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from 'react';
 import { ContainerElementForm } from '../ContainerElementForm';
 
 function InputCautivaForms({ text, name, type, max, setDataModule, dataModule, valueUser }) {
-
     const [limit, setLimit] = useState(valueUser || '');
     const hasInitialized = useRef(false); // Usamos useRef para almacenar un valor mutable que no dispara renders
 
@@ -14,23 +13,26 @@ function InputCautivaForms({ text, name, type, max, setDataModule, dataModule, v
         // Actualizar el estado con el nuevo objeto
         setDataModule(updatedData);
         console.log('sendToStageApi:', updatedData); // Verificar que el valor se envía correctamente
-    }
+    };
 
     useEffect(() => {
-      console.log('ejecuta useEffect');
+        console.log('ejecuta useEffect');
       
-      // Solo ejecutar si no ha sido inicializado aún
-      if (valueUser && !hasInitialized.current) {
-          console.log('Se mandará valueUser', valueUser);
-          sendToStageApi(valueUser);
-          hasInitialized.current = true; // Marcar como inicializado
-      }
+        // Solo ejecutar si no ha sido inicializado aún
+        if (valueUser && !hasInitialized.current) {
+            console.log('Se mandará valueUser', valueUser);
+            sendToStageApi(valueUser);
+            hasInitialized.current = true; // Marcar como inicializado
+        }
     }, [valueUser]); // Mantener la dependencia de valueUser
 
     const handleInputChange = (e) => {
         if (valueUser) return; // No permitir cambios si valueUser está presente
 
         let value = e.target.value;
+
+        // Eliminar cualquier coma del valor ingresado
+        value = value.replace(/,/g, '');
 
         if (type === 'number') {
             // Eliminar cualquier caracter que no sea numérico
@@ -51,10 +53,8 @@ function InputCautivaForms({ text, name, type, max, setDataModule, dataModule, v
 
     return (
         <ContainerElementForm>
+            {text && <label className='TextTitleFormComponent'>{text}</label>}
 
-            {text &&    <label className='TextTitleFormComponent'>{text}</label>}
-
-         
             <input
                 name={name}
                 type="text" // Cambiamos a text para evitar la "e" y otras letras
