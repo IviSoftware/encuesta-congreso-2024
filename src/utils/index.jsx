@@ -88,8 +88,14 @@ function formatSurveyResponse1(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
+  
+
+
+     // Crear el array filtrando valores vacíos
+     const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
+     responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray;
+
+    
 
     // Devolver el objeto formateado
     return responses;
@@ -142,8 +148,15 @@ function formatSurveyResponse2(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
+
+
+      // Crear el array filtrando valores vacíos
+      const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
+
+      // Asignar el array directamente en la respuesta
+      responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray;
+
+    
 
     // Devolver el objeto formateado
     return responses;
@@ -193,8 +206,13 @@ function formatSurveyResponse3(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
+
+       // Crear el array filtrando valores vacíos
+       const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
+
+       // Asignar el array directamente en la respuesta
+       responses.extraConferenciasInteresantes = extraPlenariasInteresantesArray;
+   
 
     // Devolver el objeto formateado
     return responses;
@@ -252,8 +270,13 @@ function formatSurveyResponse4(inputObject) {
     // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
     const extraPlenariasInteresantes1 = inputObject.extraConferenciaInteresantes1 || '';
     const extraPlenariasInteresantes2 = inputObject.extraConferenciaInteresantes2 || '';
+
+
+    // Crear el array filtrando valores vacíos
     const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraConferenciasInteresantes = extraPlenariasInteresantesArray.join(', ');
+
+    // Asignar el array directamente en la respuesta
+    responses.extraConferenciasInteresantes = extraPlenariasInteresantesArray;
 
 
 
