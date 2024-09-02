@@ -156,7 +156,7 @@ function formatSurveyResponse2(inputObject) {
       const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
 
       // Asignar el array directamente en la respuesta
-      responses.extraPlenariasInteresantes = json.stringify(extraPlenariasInteresantesArray);
+      responses.extraPlenariasInteresantes = JSON.stringify(extraPlenariasInteresantesArray);
 
     
 
@@ -213,7 +213,7 @@ function formatSurveyResponse3(inputObject) {
        const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
 
        // Asignar el array directamente en la respuesta
-       responses.extraConferenciasInteresantes = json.stringify(extraPlenariasInteresantesArray);
+       responses.extraConferenciasInteresantes = JSON.stringify(extraPlenariasInteresantesArray);
    
 
     // Devolver el objeto formateado
@@ -278,7 +278,7 @@ function formatSurveyResponse4(inputObject) {
     const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
 
     // Asignar el array directamente en la respuesta
-    responses.extraConferenciasInteresantes = json.stringify(extraPlenariasInteresantesArray);
+    responses.extraConferenciasInteresantes = JSON.stringify(extraPlenariasInteresantesArray);
 
 
 
