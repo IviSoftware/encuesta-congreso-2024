@@ -84,6 +84,7 @@ function WelcomeQuests({ setQuestState,setQuestType }) {
                                         localStorage.setItem('nombreAsistente', `${response.data.nombre} ${response.data.apellido}`)
                                         localStorage.setItem('telefonoAsistente', response.data.metadaData.telefono);
                                         localStorage.setItem('estadoProcedenciaAsistente', response.data.metadaData.estado);
+                                        localStorage.setItem('slugQuest',response.data.slugEncuesta)
                                         
                                         switch (response.data.slugEncuesta) {
                                             case "sat_con_per_pro_vir":
