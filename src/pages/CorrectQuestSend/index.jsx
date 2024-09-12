@@ -44,7 +44,12 @@ function CorrectQuestSend() {
             <div className="mt-8 flex flex-col justify-center items-center gap-6 space-x-4">
               
               <div className="flex flex-col items-center gap-6">
-                 <p className="text-center">ES NECESARIO CONTESTAR LA SIGUIENTE ENCUESTA PARA DESCARGAR SU CONSTANCIA</p>
+                 <p className="text-center">PASOS PARA DESCARGAR TU CONSTANCIA:</p>
+                 <ol style={{ listStyleType: 'decimal', paddingLeft: '20px', margin: '0' }}>
+                    <li>CONTESTA LA SIGUIENTE ENCUESTA</li>
+                    <li>VUELVE A INGRESAR TU CORREO EN <a href="https://cnd-encuesta.vercel.app/"><b className='text-blue-500'>ESTE LINK</b></a></li>
+                    <li>SE ABRIRÁ UN MODAL DONDE DEBES DAR CLIC EN EL BOTÓN PARA DESCARGAR CONSTANCIA</li>
+                 </ol>
                 <button 
                     className="px-4 py-2 bg-gray-100 text-black rounded shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
                     onClick={handleConstancia}
