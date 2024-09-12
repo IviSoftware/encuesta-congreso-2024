@@ -52,7 +52,7 @@ function WelcomeQuests({ setQuestState,setQuestType }) {
                                 localStorage.setItem('emailQuests', email)        
                            
                                 const response = await validateUser(email);
-                                console.log(response,'response');
+                                
                                 if(response.message === 'No se encontraron datos para el correo proporcionado.'){
                                 
                                     Swal.fire({

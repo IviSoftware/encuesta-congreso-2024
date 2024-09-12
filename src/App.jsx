@@ -9,11 +9,23 @@ import { Quest4 } from './pages/Quest4';
 import { CautivaModal } from './components/organismos/CautivaModal';
 import { SupportButton } from './components/atomos/SupportButton';
 
+function getDate() {
+  const hoy = new Date();
+  
+  // Obtenemos los componentes de la fecha
+  const dia = String(hoy.getDate()).padStart(2, '0');
+  const mes = String(hoy.getMonth() + 1).padStart(2, '0'); // Los meses van de 0 a 11
+  const año = String(hoy.getFullYear()).slice(-2); // Solo obtenemos los últimos dos dígitos del año
+
+  // Formateamos la fecha como 'MM/DD/YY'
+  return `${mes}/${dia}/${año}`;
+}
+
 
 
 function App() {
   const [yourParamValue, setYourParamValue] = useState(null);
-  const [questState, setQuestState] = useState("staging");
+  const [questState, setQuestState] = useState("");
   const [questType, setQuestType] = useState("");
 
   useEffect(() => {
@@ -26,7 +38,17 @@ function App() {
 
     // Actualiza el estado con el valor del parámetro
     setYourParamValue(paramValue);
+
+    const date = getDate()
+    if(date === '09/13/24'){
+      setQuestState('disabledQuest')
+    }else{
+      setQuestState('staging')
+    }
+   
   }, []);
+
+
 
   useEffect(() => {
     // Subir el scroll al inicio cuando show cambie
@@ -36,12 +58,24 @@ function App() {
   return (<>
     <SupportButton />
     <TransitionGroup>
-    {questState === 'staging' && (
-                <CautivaModal
-                fn={()=>setQuestState('start')}
-                    message="Esta encuesta estará disponible del 07 al 13 de septiembre y es un requisito obligatorio para recibir tu constancia."
-                />
-            )}
+
+      {questState === 'disabledQuest' && <CautivaModal disabledBtn={true}
+        fn={() => {
+          setQuestState('disabledQuest')
+          location.reload()
+        }}
+        message="Lo sentimos, esta encuesta ya no está activa."
+      />}
+
+      {questState === 'staging' && (
+        <CautivaModal
+          fn={() => setQuestState('start')}
+          message="Esta encuesta estará disponible del 07 al 13 de septiembre y es un requisito obligatorio para recibir tu constancia."
+        />
+      )}
+
+
+     
 
 
       {questState === "start" && (

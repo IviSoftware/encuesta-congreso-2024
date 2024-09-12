@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './CautivaModal.css';
 
-const CautivaModal = ({  message, fn }) => {
+const CautivaModal = ({  message, fn, disabledBtn }) => {
 
     const  [show,setShow] =useState(true);
 
@@ -13,12 +13,13 @@ const CautivaModal = ({  message, fn }) => {
             <div className="ios-modal-container">
                 <img src="img/iconoDiabetes.png" style={{margin:"0 auto",marginBottom:"22px"}} />
                 <p className="ios-modal-text">{message}</p>
-                <button className="ios-modal-button" onClick={()=>{
+                {!disabledBtn &&  <button className="ios-modal-button" onClick={()=>{
                     setShow(false)
                     fn && fn()
                 }}>
                     Entiendo
-                </button>
+                </button> }
+               
             </div>
         </div>
     </CSSTransition>}
