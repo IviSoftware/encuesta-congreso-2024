@@ -39,7 +39,7 @@ function App() {
     {questState === 'staging' && (
                 <CautivaModal
                 fn={()=>setQuestState('start')}
-                    message="Esta encuesta estará disponible del 07 al 12 de septiembre y es un requisito obligatorio para recibir tu constancia."
+                    message="Esta encuesta estará disponible del 07 al 13 de septiembre y es un requisito obligatorio para recibir tu constancia."
                 />
             )}
 
