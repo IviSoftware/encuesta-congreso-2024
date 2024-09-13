@@ -40,7 +40,7 @@ function App() {
     setYourParamValue(paramValue);
 
     const date = getDate()
-    if(date === '09/17/24'){
+    if(date === '09/20/24'){
       setQuestState('disabledQuest')
     }else{
       setQuestState('staging')
@@ -70,7 +70,7 @@ function App() {
       {questState === 'staging' && (
         <CautivaModal
           fn={() => setQuestState('start')}
-          message="Esta encuesta estará disponible del 07 al 17 de septiembre y es un requisito obligatorio para recibir tu constancia."
+          message="Esta encuesta estará disponible del 07 al 20 de septiembre y es un requisito obligatorio para recibir tu constancia."
         />
       )}
 

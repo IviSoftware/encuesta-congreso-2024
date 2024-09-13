@@ -69,7 +69,8 @@ function CorrectQuestSend() {
                  <ol style={{ listStyleType: 'decimal', paddingLeft: '20px', margin: '0' }}>
                     <li>CONTESTA LA SIGUIENTE ENCUESTA</li>
                     <li>VUELVE A INGRESAR TU CORREO EN <a href="https://cnd-encuesta.vercel.app/"><b className='text-blue-500'>ESTE LINK</b></a></li>
-                    <li>SE ABRIRÁ UN MODAL DONDE DEBES DAR CLIC EN EL BOTÓN PARA DESCARGAR CONSTANCIA</li>
+                    <li>SE ABRIRÁ UNA VENTANA DONDE DEBES DAR CLIC EN EL BOTÓN PARA DESCARGAR CONSTANCIA</li>
+                    <li><span className="text-red-500">Nota importante: Esta es solo una constancia de asistencia o participación. Tu constancia con aval curricular llegará a partir del 21 de octubre a tu correo electrónico.</span></li>
                  </ol>
                 <button 
                     className="px-4 py-2 bg-gray-100 text-black rounded shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out"
