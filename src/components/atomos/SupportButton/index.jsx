@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 function SupportButton() {
   // Números de teléfono para WhatsApp
   const phoneNumbers = [
-    "+522211135027", // Reemplaza con el primer número
+    "+522492623130", // Reemplaza con el primer número
     "+522214064130", // Reemplaza con el segundo número
   ];
 
