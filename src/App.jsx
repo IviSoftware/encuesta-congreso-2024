@@ -38,7 +38,7 @@ function App() {
     setYourParamValue(paramValue);
 
     const date = getDate();
-    if (date === "09/27/24") {
+    if (date >= "09/27/24") {
       setQuestState("disabledQuest");
     } else {
       setQuestState("staging");
