@@ -1,279 +1,296 @@
-function validateObjectFields(obj, keys, translations,setDataModule) {
+function validateObjectFields(obj, keys, translations, setDataModule) {
+  const missingFields = [];
 
-   
+  // Verificar si el objeto está vacío
+  if (Object.keys(obj).length === 0) {
+    return { validate: 3, fields: [] };
+  }
 
+  // Verificar si el campo "extraEdad" es menor a 18
+  if (obj.extraEdad && Number(obj.extraEdad) < 18) {
+    return { validate: 4, fields: ["extraEdad"] };
+  }
 
-    const missingFields = [];
+  // Verificar si todas las claves especificadas tienen valores
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = obj[key];
 
-    console.log(obj,'objssss')
-
-    // Verificar si el objeto está vacío
-    if (Object.keys(obj).length === 0) {
-        return { validate: 3, fields: [] };
+    try {
+      if (!value || (typeof value === "string" && value.trim() === "")) {
+        // Añadir la traducción correspondiente al campo faltante
+        missingFields.push(translations[i] || key);
+      }
+    } catch (error) {
+      console.error(`Error con la clave: "${key}", valor:`, value);
+      console.error(error);
     }
+  }
 
-    // Verificar si el campo "extraEdad" es menor a 18
-    if (obj.extraEdad && Number(obj.extraEdad) < 18) {
-        return { validate: 4, fields: ["extraEdad"] };
-    }
+  // Si hay campos faltantes
+  if (missingFields.length > 0) {
+    return { validate: 0, fields: missingFields };
+  }
 
-    // Verificar si todas las claves especificadas tienen valores
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        const value = obj[key];
-
-        try {
-            if (!value || (typeof value === 'string' && value.trim() === "")) {
-                // Añadir la traducción correspondiente al campo faltante
-                missingFields.push(translations[i] || key);
-            }
-        } catch (error) {
-            console.error(`Error con la clave: "${key}", valor:`, value);
-            console.error(error);
-        }
-    }
-
-    // Si hay campos faltantes
-    if (missingFields.length > 0) {
-        return { validate: 0, fields: missingFields };
-    }
-
-    // Si todos los campos están llenos
-    return { validate: 1, fields: [] };
+  // Si todos los campos están llenos
+  return { validate: 1, fields: [] };
 }
-
 
 function formatSurveyResponse1(inputObject) {
-    // Crear el objeto de salida con los valores fijos
-    let responses = {};
-   
+  // Crear el objeto de salida con los valores fijos
+  let responses = {};
 
-    // Mapeo de las respuestas
-    const responseKeys = [
-        "extraEdad",
-        "extraEstadoProcedencia",
-        "extraPerfil",
-        "extraEspecialidad",
-        "extraConsulta",
-        "extraInstitucionTrabajo",
-        "extraMedioEnteroCongreso",
-        "extraKitCongresistaAdecuado",
-        "extraTransmisionPonenciasAdecuada",
-        "extraMediosAudiovisualesAdecuados",
-        "extraTemasActuales",
-        "extraNivelContenidos",
-        "extraDistribucionActividades",
-        "extraTiempoActividades",
-        "extraSeleccionPonentes",
-        "extraParticipacionPonentes",
-        "extraComunicacionPonentes",
-        "extraCumplieronObjetivos",
-        "extraOrganizacionCongreso",
-        "extraCongresoCumplioExpectativas",
-        "extraEscalaObjetivoAcademico",
-        "extraRecomendariaCongreso",
-        "extraAcudiria34Congreso",
-        "extraObservacionesConclusiones"
-    ];
+  // Mapeo de las respuestas
+  const responseKeys = [
+    "extraEdad",
+    "extraEstadoProcedencia",
+    "extraPerfil",
+    "extraEspecialidad",
+    "extraConsulta",
+    "extraInstitucionTrabajo",
+    "extraMedioEnteroCongreso",
+    "extraKitCongresistaAdecuado",
+    "extraTransmisionPonenciasAdecuada",
+    "extraMediosAudiovisualesAdecuados",
+    "extraTemasActuales",
+    "extraNivelContenidos",
+    "extraDistribucionActividades",
+    "extraTiempoActividades",
+    "extraSeleccionPonentes",
+    "extraParticipacionPonentes",
+    "extraComunicacionPonentes",
+    "extraCumplieronObjetivos",
+    "extraOrganizacionCongreso",
+    "extraCongresoCumplioExpectativas",
+    "extraEscalaObjetivoAcademico",
+    "extraRecomendariaCongreso",
+    "extraAcudiria34Congreso",
+    "extraObservacionesConclusiones",
+  ];
 
-    // Rellenar las respuestas con los valores del objeto de entrada
-    responseKeys.forEach(key => {
-        if (inputObject[key]) {
-            responses[key] = inputObject[key];
-        } else {
-            console.log("Falta:", key);
-        }
-    });
+  // Rellenar las respuestas con los valores del objeto de entrada
+  responseKeys.forEach((key) => {
+    if (inputObject[key]) {
+      responses[key] = inputObject[key];
+    } else {
+      console.log("Falta:", key);
+    }
+  });
 
-    // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
-    const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
-    const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
+  // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
+  const extraPlenariasInteresantes1 =
+    inputObject.extraPlenariasInteresantes1 || "";
+  const extraPlenariasInteresantes2 =
+    inputObject.extraPlenariasInteresantes2 || "";
+  const extraPlenariasInteresantesArray = [
+    extraPlenariasInteresantes1,
+    extraPlenariasInteresantes2,
+  ].filter((item) => item !== "");
+  responses.extraPlenariasInteresantes =
+    extraPlenariasInteresantesArray.join(", ");
 
-    // Devolver el objeto formateado
-    return responses;
+  // Devolver el objeto formateado
+  return responses;
 }
 
+function formatSurveyResponseGen(inputObject) {}
 
 function formatSurveyResponse2(inputObject) {
-    // Crear el objeto de salida con los valores fijos
-    let responses = {};
+  // Crear el objeto de salida con los valores fijos
+  let responses = {};
 
-    // Mapeo de las respuestas
-    const responseKeys = [
-        "extraEdad",
-        "extraEstadoProcedencia",
-        "extraPerfil",
-        "extraEspecialidad",
-        "extraConsulta",
-        "extraInstitucionTrabajo",
-        "extraMedioEnteroCongreso",
-        "extraInstalacionSedeCongresoAdecuada",
-        "extraDistribucionSalonesAdecuada",
-        "extraZonaComercialInfoRelevanteObjetivoCongreso",
-        "extraViajeSaludIdeaInnovadoraAcordeObjectivoCongreso",
-        "extraNivelContenidos",
-        "extraDistribucionActividades",
-        "extraTiempoActividades",
-        "extraSeleccionPonentes",
-        "extraParticipacionPonentes",
-        "extraComunicacionPonentes",
-        "extraCumplieronObjetivos",
-        "extraOrganizacionCongreso",
-        "extraCongresoCumplioExpectativas",
-        "extraEscalaObjetivoAcademico",
-        "extraRecomendariaCongreso",
-        "extraAcudiria34Congreso",
-        "extraObservacionesConclusiones",
-        "extraMediosAudiovisualesAdecuados",
-        "extraTemasActuales"
-    ];
+  // Mapeo de las respuestas
+  const responseKeys = [
+    "extraEdad",
+    "extraEstadoProcedencia",
+    "extraPerfil",
+    "extraEspecialidad",
+    "extraConsulta",
+    "extraInstitucionTrabajo",
+    "extraMedioEnteroCongreso",
+    "extraInstalacionSedeCongresoAdecuada",
+    "extraDistribucionSalonesAdecuada",
+    "extraZonaComercialInfoRelevanteObjetivoCongreso",
+    "extraViajeSaludIdeaInnovadoraAcordeObjectivoCongreso",
+    "extraNivelContenidos",
+    "extraDistribucionActividades",
+    "extraTiempoActividades",
+    "extraSeleccionPonentes",
+    "extraParticipacionPonentes",
+    "extraComunicacionPonentes",
+    "extraCumplieronObjetivos",
+    "extraOrganizacionCongreso",
+    "extraCongresoCumplioExpectativas",
+    "extraEscalaObjetivoAcademico",
+    "extraRecomendariaCongreso",
+    "extraAcudiria34Congreso",
+    "extraObservacionesConclusiones",
+    "extraMediosAudiovisualesAdecuados",
+    "extraTemasActuales",
+  ];
 
-    // Rellenar las respuestas con los valores del objeto de entrada
-    responseKeys.forEach(key => {
-        if (inputObject[key]) {
-            responses[key] = inputObject[key];
-        } else {
-            console.log("Falta:", key);
-        }
-    });
+  // Rellenar las respuestas con los valores del objeto de entrada
+  responseKeys.forEach((key) => {
+    if (inputObject[key]) {
+      responses[key] = inputObject[key];
+    } else {
+      console.log("Falta:", key);
+    }
+  });
 
-    // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
-    const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
-    const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
+  // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
+  const extraPlenariasInteresantes1 =
+    inputObject.extraPlenariasInteresantes1 || "";
+  const extraPlenariasInteresantes2 =
+    inputObject.extraPlenariasInteresantes2 || "";
+  const extraPlenariasInteresantesArray = [
+    extraPlenariasInteresantes1,
+    extraPlenariasInteresantes2,
+  ].filter((item) => item !== "");
+  responses.extraPlenariasInteresantes =
+    extraPlenariasInteresantesArray.join(", ");
 
-    // Devolver el objeto formateado
-    return responses;
+  // Devolver el objeto formateado
+  return responses;
 }
-
 
 function formatSurveyResponse3(inputObject) {
-    // Crear el objeto de salida con los valores fijos
-    let responses = {};
+  // Crear el objeto de salida con los valores fijos
+  let responses = {};
 
-    // Mapeo de las respuestas
-    const responseKeys = [
-        "extraEdad",
-        "extraEstadoProcedencia",
-        "extraVivesCon",
-        "extraTelefono",
-        "extraMedioEnteroCongreso",
-        "extraKitCongresistaAdecuado",
-        "extraTransmisionPonenciasAdecuada",
-        "extraMediosAudiovisualesAdecuados",
-        "extraTemasActuales",
-        "extraNivelContenidos",
-        "extraDistribucionActividades",
-        "extraTiempoActividades",
-        "extraSeleccionPonentes",
-        "extraParticipacionPonentes",
-        "extraComunicacionPonentes",
-        "extraCumplieronObjetivos",
-        "extraOrganizacionCongreso",
-        "extraCongresoCumplioExpectativas",
-        "extraEscalaObjetivoAcademico",
-        "extraRecomendariaCongreso",
-        "extraAcudiria34Congreso",
-        "extraObservacionesConclusiones",
-        "extraSugerencias"
-    ];
+  // Mapeo de las respuestas
+  const responseKeys = [
+    "extraEdad",
+    "extraEstadoProcedencia",
+    "extraVivesCon",
+    "extraTelefono",
+    "extraMedioEnteroCongreso",
+    "extraKitCongresistaAdecuado",
+    "extraTransmisionPonenciasAdecuada",
+    "extraMediosAudiovisualesAdecuados",
+    "extraTemasActuales",
+    "extraNivelContenidos",
+    "extraDistribucionActividades",
+    "extraTiempoActividades",
+    "extraSeleccionPonentes",
+    "extraParticipacionPonentes",
+    "extraComunicacionPonentes",
+    "extraCumplieronObjetivos",
+    "extraOrganizacionCongreso",
+    "extraCongresoCumplioExpectativas",
+    "extraEscalaObjetivoAcademico",
+    "extraRecomendariaCongreso",
+    "extraAcudiria34Congreso",
+    "extraObservacionesConclusiones",
+    "extraSugerencias",
+  ];
 
-    // Rellenar las respuestas con los valores del objeto de entrada
-    responseKeys.forEach(key => {
-        if (inputObject[key]) {
-            responses[key] = inputObject[key];
-        } else {
-            console.log("Falta:", key);
-        }
-    });
+  // Rellenar las respuestas con los valores del objeto de entrada
+  responseKeys.forEach((key) => {
+    if (inputObject[key]) {
+      responses[key] = inputObject[key];
+    } else {
+      console.log("Falta:", key);
+    }
+  });
 
-    // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
-    const extraPlenariasInteresantes1 = inputObject.extraPlenariasInteresantes1 || '';
-    const extraPlenariasInteresantes2 = inputObject.extraPlenariasInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraPlenariasInteresantes = extraPlenariasInteresantesArray.join(', ');
+  // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
+  const extraPlenariasInteresantes1 =
+    inputObject.extraPlenariasInteresantes1 || "";
+  const extraPlenariasInteresantes2 =
+    inputObject.extraPlenariasInteresantes2 || "";
+  const extraPlenariasInteresantesArray = [
+    extraPlenariasInteresantes1,
+    extraPlenariasInteresantes2,
+  ].filter((item) => item !== "");
+  responses.extraPlenariasInteresantes =
+    extraPlenariasInteresantesArray.join(", ");
 
-    // Devolver el objeto formateado
-    return responses;
+  // Devolver el objeto formateado
+  return responses;
 }
-
-
-
 
 function formatSurveyResponse4(inputObject) {
-    // Crear el objeto de salida con los valores fijos
-    let responses = {};
+  // Crear el objeto de salida con los valores fijos
+  let responses = {};
 
-    // Mapeo de las respuestas
-    const responseKeys = [  
-        "extraEdad",
-        "extraEstadoProcedencia",
-        "extraTipoDiabetes",
-        "extraTelefono",
-        "extraMedioEnteroCongreso",
-        "extraKitCongresistaAdecuado",
-        "extraTransmisionPonenciasAdecuada",
-        "extraMediosAudiovisualesAdecuados",
-        "extraInstalacionesAdecuadas",
-        "extraDistribucionSalones",
-        "extraMediosAudiovisualesVisibles",
-        "extraStandsInformacionRelevante",
-        "extraViajeSaludInnovador",
-        "extraTemasActuales",
-        "extraNivelContenidos",
-        "extraDistribucionActividades",
-        "extraTiempoActividades",
-        "extraSeleccionPonentes",
-        "extraParticipacionPonentes",
-        "extraComunicacionPonentes",
-        "extraCumplieronObjetivos",
-        "extraOrganizacionCongreso",
-        "extraCongresoCumplioExpectativas",
-        "extraEscalaObjetivoAcademico",
-        "extraRecomendariaCongreso",
-        "extraAcudiria34Congreso",
-        "extraObservacionesConclusiones",
-        "extraSugerencias"
-    ];
+  // Mapeo de las respuestas
+  const responseKeys = [
+    "extraEdad",
+    "extraEstadoProcedencia",
+    "extraTipoDiabetes",
+    "extraTelefono",
+    "extraMedioEnteroCongreso",
+    "extraKitCongresistaAdecuado",
+    "extraTransmisionPonenciasAdecuada",
+    "extraMediosAudiovisualesAdecuados",
+    "extraInstalacionesAdecuadas",
+    "extraDistribucionSalones",
+    "extraMediosAudiovisualesVisibles",
+    "extraStandsInformacionRelevante",
+    "extraViajeSaludInnovador",
+    "extraTemasActuales",
+    "extraNivelContenidos",
+    "extraDistribucionActividades",
+    "extraTiempoActividades",
+    "extraSeleccionPonentes",
+    "extraParticipacionPonentes",
+    "extraComunicacionPonentes",
+    "extraCumplieronObjetivos",
+    "extraOrganizacionCongreso",
+    "extraCongresoCumplioExpectativas",
+    "extraEscalaObjetivoAcademico",
+    "extraRecomendariaCongreso",
+    "extraAcudiria34Congreso",
+    "extraObservacionesConclusiones",
+    "extraSugerencias",
+  ];
 
-    // Rellenar las respuestas con los valores del objeto de entrada
-    responseKeys.forEach(key => {
-        if (inputObject[key]) {
-            responses[key] = inputObject[key];
-        } else {
-            console.log("Falta:", key);
-        }
-    });
-
-
-    // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
-    const extraPlenariasInteresantes1 = inputObject.extraConferenciaInteresantes1 || '';
-    const extraPlenariasInteresantes2 = inputObject.extraConferenciaInteresantes2 || '';
-    const extraPlenariasInteresantesArray = [extraPlenariasInteresantes1, extraPlenariasInteresantes2].filter(item => item !== '');
-    responses.extraConferenciasInteresantes = extraPlenariasInteresantesArray.join(', ');
-
-
-
-    // Devolver el objeto formateado
-    return responses;
-}
-
-
-const getBasicData = ()=>{
-    const fullName = localStorage.getItem('nombreAsistente');
-    const telefonoAsistente = localStorage.getItem('telefonoAsistente')
-    const estadoProcedenciaAsistente = localStorage.getItem('estadoProcedenciaAsistente')
-
-    return {
-        fullName,
-        telefonoAsistente,
-        estadoProcedenciaAsistente
+  // Rellenar las respuestas con los valores del objeto de entrada
+  responseKeys.forEach((key) => {
+    if (inputObject[key]) {
+      responses[key] = inputObject[key];
+    } else {
+      console.log("Falta:", key);
     }
+  });
 
+  // Combinar extraPlenariasInteresantes1 y extraPlenariasInteresantes2 en un array y luego en un string
+  const extraPlenariasInteresantes1 =
+    inputObject.extraConferenciaInteresantes1 || "";
+  const extraPlenariasInteresantes2 =
+    inputObject.extraConferenciaInteresantes2 || "";
+  const extraPlenariasInteresantesArray = [
+    extraPlenariasInteresantes1,
+    extraPlenariasInteresantes2,
+  ].filter((item) => item !== "");
+  responses.extraConferenciasInteresantes =
+    extraPlenariasInteresantesArray.join(", ");
+
+  // Devolver el objeto formateado
+  return responses;
 }
 
+const getBasicData = () => {
+  const fullName = localStorage.getItem("nombreAsistente");
+  const telefonoAsistente = localStorage.getItem("telefonoAsistente");
+  const estadoProcedenciaAsistente = localStorage.getItem(
+    "estadoProcedenciaAsistente"
+  );
 
-export { validateObjectFields, formatSurveyResponse1, formatSurveyResponse2,formatSurveyResponse3,formatSurveyResponse4,getBasicData};
+  return {
+    fullName,
+    telefonoAsistente,
+    estadoProcedenciaAsistente,
+  };
+};
+
+export {
+  validateObjectFields,
+  formatSurveyResponse1,
+  formatSurveyResponse2,
+  formatSurveyResponse3,
+  formatSurveyResponse4,
+  getBasicData,
+  formatSurveyResponseGen,
+};

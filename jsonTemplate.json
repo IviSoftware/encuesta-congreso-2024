@@ -1,0 +1,34 @@
+{
+  "action": "saveSatisfactionSurveyResponses",
+  "email": "example@example.com",
+  "asistenteId": 12345,
+  "slug": "sat_con_gen",
+  "respuestas": [
+    {
+      "extraAsistidoEventosPrevios": "example_value",
+      "extraLugarResidencia": "example_value",
+      "extraNacionalidad": "example_value",
+      "extraPosicionHospital": "example_value",
+      "extraAgradadoCongreso": "example_value",
+      "extraCongresoCumplioExpectativas": "example_value",
+      "extraUtilidadInformacion": "example_value",
+      "extraMejoroHabilidades": "example_value",
+      "extraSatisfaccionGeneral": "example_value",
+      "extraCalificacionInstalaciones": "example_value",
+      "extraCalificacionOrganizacion": "example_value",
+      "extraPlaticasFavoritas": "example_value",
+      "extraQueNoTeGusto": "example_value",
+      "extraAsistiriaFuturoEvento": "example_value",
+      "extraComentariosSugerencias": "example_value"
+    }
+  ],
+  "fkAsistenteMetaData": {
+    "ciudad": "example_texto",
+    "dispositivo": "example_texto",
+    "estado": "example_texto",
+    "ip": "example_texto",
+    "navegador": "example_texto",
+    "pais": "example_texto",
+    "ubicacion": "example_texto"
+  }
+}

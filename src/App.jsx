@@ -8,6 +8,7 @@ import { Quest3 } from "./pages/Quest3";
 import { Quest4 } from "./pages/Quest4";
 import { CautivaModal } from "./components/organismos/CautivaModal";
 import { SupportButton } from "./components/atomos/SupportButton";
+import { QuestGeneral } from "./pages/QuestGeneral";
 
 function getDate() {
   const hoy = new Date();
@@ -37,18 +38,39 @@ function App() {
     // Actualiza el estado con el valor del parámetro
     setYourParamValue(paramValue);
 
-    const date = getDate();
+    /*   const date = getDate();
     if (date >= "09/27/24") {
       setQuestState("disabledQuest");
     } else {
       setQuestState("staging");
-    }
+    } */
+
+    setQuestState("start");
   }, []);
 
   useEffect(() => {
     // Subir el scroll al inicio cuando show cambie
     window.scrollTo(0, 0);
   }, [questState]);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const location = `Lat: ${latitude}, Lng: ${longitude}`;
+          localStorage.setItem("location", location); // Guarda la ubicación encontrada en localStorage
+        },
+        (error) => {
+          console.error("Error al obtener ubicación:", error);
+          localStorage.setItem("location", "Ubicación desconocida"); // Guarda "Ubicación desconocida" en caso de error
+        }
+      );
+    } else {
+      localStorage.setItem("location", "Geolocalización no soportada"); // Guarda "Geolocalización no soportada" si no está disponible
+    }
+  }, []);
 
   return (
     <>
@@ -65,12 +87,12 @@ function App() {
           />
         )}
 
-        {questState === "staging" && (
+        {/*       {questState === "staging" && (
           <CautivaModal
             fn={() => setQuestState("start")}
             message="Esta encuesta estará disponible del 07 al 25 de septiembre y es un requisito obligatorio para recibir tu constancia."
           />
-        )}
+        )} */}
 
         {questState === "start" && (
           <CSSTransition
@@ -83,6 +105,17 @@ function App() {
               setQuestState={setQuestState}
               setQuestType={setQuestType}
             />
+          </CSSTransition>
+        )}
+
+        {questState === "questStarting" && questType === "questGeneral" && (
+          <CSSTransition
+            in={questState}
+            timeout={300}
+            classNames="fade"
+            unmountOnExit
+          >
+            <QuestGeneral />
           </CSSTransition>
         )}
 

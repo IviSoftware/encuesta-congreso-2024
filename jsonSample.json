@@ -1,0 +1,34 @@
+{
+  "action": "saveSatisfactionSurveyResponses",
+  "email": "nayelli.cristal73@gmail.com",
+  "asistenteId": "136",
+  "slug": "sat_con_gen",
+  "respuestas": [
+    {
+      "extraAsistidoEventosPrevios": "No",
+      "extraLugarResidencia": "Ciudad de México y área metropolitana",
+      "extraNacionalidad": "No mexicana",
+      "extraPosicionHospital": "Médico nefrólogo adscrito a una institución pública",
+      "extraAgradadoCongreso": "No",
+      "extraCongresoCumplioExpectativas": "Sí",
+      "extraUtilidadInformacion": "Útil",
+      "extraMejoroHabilidades": "De acuerdo",
+      "extraSatisfaccionGeneral": "Muy insatisfecho",
+      "extraCalificacionInstalaciones": "Regulares",
+      "extraCalificacionOrganizacion": "Muy mala",
+      "extraPlaticasFavoritas": "nada",
+      "extraQueNoTeGusto": "Programa académico",
+      "extraAsistiriaFuturoEvento": "Sí",
+      "extraComentariosSugerencias": "sdsdsa"
+    }
+  ],
+  "fkAsistenteMetaData": {
+    "ciudad": "Ciudad de México y área metropolitana",
+    "dispositivo": "MacOS",
+    "estado": "Ciudad de México y área metropolitana",
+    "pais": "No mexicana",
+    "navegador": "Chrome",
+    "ip": "177.240.120.26",
+    "ubicacion": "Ubicación desconocida"
+  }
+}
