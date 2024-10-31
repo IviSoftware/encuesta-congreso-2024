@@ -36,7 +36,7 @@ function OptionsWithOther({ text, options, name, setDataModule, dataModule }) {
             dataModule={dataModule}
             type="text"
             name={name} // Asigna el `name` principal al campo de texto
-            text="Especifica"
+            text="Específica"
             onChange={handleOtherInputChange} // Asigna el valor del input de texto al `dataModule`
           />
         </div>

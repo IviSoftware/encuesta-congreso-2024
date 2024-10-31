@@ -335,7 +335,7 @@ function QuestGeneral() {
 
   return (
     <ContainerQuest
-      title="Encuesta de satisfacción del LXXI Internacional en Nefrología IMIN 2024"
+      title="Encuesta de satisfacción del XXI Congreso Internacional en Nefrología IMIN 2024"
       percentageState={percentageState}
     >
       {percentageState !== 100 &&
