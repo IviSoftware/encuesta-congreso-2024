@@ -20,6 +20,7 @@ function QuestGeneral() {
   const [totalStages, setTotalStages] = useState(1);
   const [sendingData, setSendingData] = useState(false);
   const [errorApiGet, setErrorApiGet] = useState(false);
+  const [favoriteTalks, setFavoriteTalks] = useState({ talk1: "", talk2: "" });
   const [dimensions, setDimensions] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -281,7 +282,19 @@ function QuestGeneral() {
   const validateStageFields = (stageIndex) => {
     const { keys, translations } = stageConfig[stageIndex];
     const response = validateObjectFields(dataModule, keys, translations);
-
+  
+    // Validación específica para "favoriteTalks"
+    if (keys.includes("favoriteTalks")) {
+      if (!favoriteTalks.talk1 || !favoriteTalks.talk2) {
+        Swal.fire({
+          title: "Faltan por rellenar",
+          text: "Los campos de pláticas favoritas están vacíos.",
+          icon: "info",
+        });
+        return false;
+      }
+    }
+  
     if (response.validate === 0) {
       Swal.fire({
         title: "Faltan por rellenar",
@@ -301,6 +314,7 @@ function QuestGeneral() {
       return false;
     }
   };
+  
 
   const handleNextStage = () => {
     if (validateStageFields(stage - 1)) {
@@ -333,6 +347,15 @@ function QuestGeneral() {
     setTotalStages(stageConfig.length - 1);
   }, []);
 
+  useEffect(() => {
+    setDataModule((prevData) => ({
+      ...prevData,
+      favoriteTalks: `${favoriteTalks.talk1}, ${favoriteTalks.talk2}`,
+    }));
+  }, [favoriteTalks]);
+  
+  
+
   return (
     <ContainerQuest
       title="Encuesta de satisfacción del XXI Congreso Internacional en Nefrología IMIN 2024"
@@ -345,14 +368,49 @@ function QuestGeneral() {
               {config.fields.map((field, idx) => {
                 switch (field.type) {
                   case "input":
-                    return (
-                      <InputCautivaForms
-                        key={idx}
-                        setDataModule={setDataModule}
-                        dataModule={dataModule}
-                        {...field.componentProps}
-                      />
-                    );
+                    // Verifica si el nombre es "favoriteTalks" para un caso especial
+                    if (field.componentProps.name === "favoriteTalks") {
+                      return (
+                        <div key={idx} className="w-full flex flex-col gap-4">
+                          <label>{field.componentProps.text}</label>
+                          <input
+                            type="text"
+                            style={{backgroundColor:'#F5F4F7',padding:"15px",borderRadius:'10px'}}
+                            placeholder="Plática favorita 1"
+                            value={favoriteTalks.talk1}
+                            required
+                            onChange={(e) =>
+                              setFavoriteTalks({
+                                ...favoriteTalks,
+                                talk1: e.target.value,
+                              })
+                            }
+                          />
+                          <input
+                            type="text"
+                            placeholder="Plática favorita 2"
+                            style={{backgroundColor:'#F5F4F7',padding:"15px",borderRadius:'10px'}}
+                            value={favoriteTalks.talk2}
+                            required
+                            onChange={(e) =>
+                              setFavoriteTalks({
+                                ...favoriteTalks,
+                                talk2: e.target.value,
+                              })
+                            }
+                          />
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <InputCautivaForms
+                          key={idx}
+                          setDataModule={setDataModule}
+                          dataModule={dataModule}
+                          {...field.componentProps}
+                        />
+                      );
+                    }
                   case "options":
                     return (
                       <OptionsCautivaForms
